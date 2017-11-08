@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="/static/plugins/nifty/template/css/bootstrap.min.css" rel="stylesheet">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="/static/plugins/nifty/template/css/nifty.min.css" rel="stylesheet">
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="/static/plugins/nifty/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="/static/plugins/nifty/template/plugins/switchery/switchery.min.css" rel="stylesheet">
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="/static/plugins/nifty/template/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="/static/plugins/nifty/template/css/demo/nifty-demo.min.css" rel="stylesheet">
+
+    {% block css %} {% endblock %}
+
+    <!--SCRIPT-->
+    <!--=================================================-->
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="/static/plugins/nifty/template/plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="/static/plugins/nifty/template/plugins/pace/pace.min.js"></script>
+
+</head>
+
+<body>
+	<div id="container" class="effect mainnav-lg">
+		
+		<!--NAVBAR-->
+		<!--===================================================-->
+		<header id="navbar">
+			<div id="navbar-container" class="boxed">
+
+				<!--Brand logo & name-->
+				<!--================================-->
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand">
+						<img src="/static/plugins/nifty/template/img/logo.png" alt="Nifty Logo" class="brand-icon">
+						<div class="brand-title">
+							<span class="brand-text">运维自动化平台</span>
+						</div>
+					</a>
+				</div>
+				<!--================================-->
+				<!--End brand logo & name-->
+
+
+				<!--Navbar Dropdown-->
+				<!--================================-->
+				<div class="navbar-content clearfix">
+					<ul class="nav navbar-top-links pull-left">
+
+						<!--Navigation toogle button-->
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<li class="tgl-menu-btn">
+							<a class="mainnav-toggle" href="#">
+								<i class="fa fa-navicon fa-lg"></i>
+							</a>
+						</li>
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<!--End Navigation toogle button-->
+					</ul>
+					<ul class="nav navbar-top-links pull-right">
+						<!--User dropdown-->
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<li id="dropdown-user" class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+								<span class="pull-right">
+									<img class="img-circle img-user media-object" src="/static/plugins/nifty/template/img/av1.png" alt="Profile Picture">
+								</span>
+								<div class="username hidden-xs" style="font-size: medium">成怡强</div>
+							</a>
+
+							<div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default", style="min-width:200px">
+
+								<!-- Dropdown heading  -->
+								<div class="pad-all bord-btm">
+
+								</div>
+								<!-- User dropdown menu -->
+								<ul class="head-list">
+									<li>
+										<a href="#">
+											<i class="fa fa-user fa-fw fa-lg"></i> 用户信息
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="badge badge-danger pull-right">9</span>
+											<i class="fa fa-envelope fa-fw fa-lg"></i> 消息
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-gear fa-fw fa-lg"></i> 设置
+										</a>
+									</li>
+								</ul>
+
+								<!-- Dropdown footer -->
+								<div class="pad-all text-right">
+									<a href="pages-login.html" class="btn btn-primary">
+										<i class="fa fa-sign-out fa-fw"></i> 注销
+									</a>
+								</div>
+							</div>
+						</li>
+						<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+						<!--End user dropdown-->
+					</ul>
+				</div>
+				<!--================================-->
+				<!--End Navbar Dropdown-->
+			</div>
+		</header>
+		<!--===================================================-->
+		<!--END NAVBAR-->
+
+		<div class="boxed">
+
+			<!--CONTENT CONTAINER-->
+			<!--===================================================-->
+			<div id="content-container">
+
+				<!--Page Title-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<div id="page-title">
+					<h1 class="page-header text-overflow">Blank page</h1>
+				</div>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End page title-->
+
+				<!--Breadcrumb-->
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Library</a></li>
+					<li class="active">Data</li>
+				</ol>
+				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+				<!--End breadcrumb-->
+
+				<!--Page content-->
+				<!--===================================================-->
+				<div id="page-content">
+					{% block conent %} {% endblock %}
+				</div>
+				<!--===================================================-->
+				<!--End page content-->
+
+			</div>
+			<!--===================================================-->
+			<!--END CONTENT CONTAINER-->
+
+			<!--MAIN NAVIGATION-->
+			<!--===================================================-->
+			<nav id="mainnav-container">
+				<div id="mainnav">
+
+					<!--Shortcut buttons-->
+					<!--================================-->
+					<div id="mainnav-shortcut">
+						<ul class="list-unstyled">
+
+							<li class="col-xs-4" data-content="Notification">
+								<a id="demo-alert" class="shortcut-grid" href="#">
+									<i class="fa fa-bullhorn"></i>
+								</a>
+							</li>
+							<li class="col-xs-4" data-content="Page Alerts">
+								<a id="demo-page-alert" class="shortcut-grid" href="#">
+									<i class="fa fa-bell"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!--================================-->
+					<!--End shortcut buttons-->
+
+					<!--Menu-->
+					<!--================================-->
+					<div id="mainnav-menu-wrap">
+						<div class="nano">
+							<div class="nano-content">
+								<ul id="mainnav-menu" class="list-group">
+
+									<!--Menu list item-->
+									<li>
+										<a href="index.html">
+											<i class="fa fa-dashboard"></i>
+											<span class="menu-title">
+												<strong>仪表盘</strong>
+                                            </span>
+										</a>
+									</li>
+									<!--Menu list item-->
+									<li>
+										<a href="#">
+											<i class="fa fa-th"></i>
+											<span class="menu-title">
+												<strong>资产管理</strong>
+											</span>
+											<i class="arrow"></i>
+										</a>
+										<!--Submenu-->
+										<ul class="collapse">
+											<li><a href="">资产查询</a></li>
+											<li><a href="">资产添加</a></li>
+										</ul>
+									</li>
+
+									<!--Menu list item-->
+									<li>
+										<a href="#">
+											<i class="fa fa-edit"></i>
+											<strong class="menu-title">IDC管理</strong>
+											<i class="arrow"></i>
+										</a>
+										<!--Submenu-->
+										<ul class="collapse">
+                                            <li><a href="">机房查询</a></li>
+											<li><a href="">机房添加</a></li>
+										</ul>
+									</li>
+
+									<!--Menu list item-->
+									<li>
+										<a href="#">
+											<i class="fa fa-briefcase"></i>
+											<strong class="menu-title">用户权限</strong>
+											<i class="arrow"></i>
+										</a>
+										<!--Submenu-->
+										<ul class="collapse">
+											<li><a href="">用户管理</a></li>
+											<li><a href="">权限管理</a></li>
+											<li><a href="">角色管理</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--================================-->
+					<!--End menu-->
+				</div>
+			</nav>
+			<!--===================================================-->
+			<!--END MAIN NAVIGATION-->
+
+		</div>
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+	<!--jQuery [ REQUIRED ]-->
+	<script src="/static/plugins/nifty/template/js/jquery-2.1.1.min.js"></script>
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="/static/plugins/nifty/template/js/bootstrap.min.js"></script>
+	<!--Fast Click [ OPTIONAL ]-->
+	<script src="/static/plugins/nifty/template/plugins/fast-click/fastclick.min.js"></script>
+	<!--Nifty Admin [ RECOMMENDED ]-->
+	<script src="/static/plugins/nifty/template/js/nifty.min.js"></script>
+	<!--Switchery [ OPTIONAL ]-->
+	<script src="/static/plugins/nifty/template/plugins/switchery/switchery.min.js"></script>
+	<!--Bootstrap Select [ OPTIONAL ]-->
+	<script src="/static/plugins/nifty/template/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+	<!--Demo script [ DEMONSTRATION ]-->
+	<script src="/static/plugins/nifty/template/js/demo/nifty-demo.min.js"></script>
+
+    {% block js %}{% endblock %}
+</body>
+</html>
+

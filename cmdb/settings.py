@@ -48,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'repository',
 ]
 
 ROOT_URLCONF = 'cmdb.urls'
@@ -56,7 +55,7 @@ ROOT_URLCONF = 'cmdb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'web', 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
