@@ -21,7 +21,8 @@
     <link href="/static/plugins/nifty/template/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
     <!--Demo [ DEMONSTRATION ]-->
     <link href="/static/plugins/nifty/template/css/demo/nifty-demo.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/static/css/backend.css"/>
+    <link rel="stylesheet" href="/static/css/commons.css"/>
     {% block css %} {% endblock %}
 
     <!--SCRIPT-->
@@ -134,20 +135,12 @@
 				<!--Page Title-->
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<div id="page-title">
-					<h1 class="page-header text-overflow">Blank page</h1>
+                    {% block title %}
+
+                    {% endblock %}
 				</div>
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<!--End page title-->
-
-				<!--Breadcrumb-->
-				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-				<ol class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Library</a></li>
-					<li class="active">Data</li>
-				</ol>
-				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-				<!--End breadcrumb-->
 
 				<!--Page content-->
 				<!--===================================================-->
@@ -318,4 +311,3 @@
     {% block js %}{% endblock %}
 </body>
 </html>
-

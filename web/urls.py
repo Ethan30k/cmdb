@@ -8,6 +8,7 @@ from web.views import home
 
 
 urlpatterns = [
+    url(r'^index.html$', home.IndexView.as_view()),
     url(r'^cmdb.html$', home.CmdbView.as_view()),
     url(r'^asset.html$', asset.AssetListView.as_view()),
     url(r'^assets.html$', asset.AssetJsonView.as_view()),
