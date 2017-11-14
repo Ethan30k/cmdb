@@ -171,7 +171,8 @@ class Asset(BaseServiceList):
             ret = {}
             conditions = self.assets_condition(request)
             asset_count = models.Asset.objects.filter(conditions).count()
-            page_info = PageInfo(request.GET.get('pager', None), asset_count)
+            peritems = int(request.GET.get('peritems', None))
+            page_info = PageInfo(request.GET.get('pager', None), asset_count, peritems)
             asset_list = models.Asset.objects.filter(conditions).extra(select=self.extra_select).values(
                 *self.values_list)[page_info.start:page_info.end]
 

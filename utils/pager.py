@@ -51,7 +51,7 @@ class PageInfo(object):
         if page <= 1:
             prev_html = "<li class='disabled'><a href='javascript:void(0)'>上一页</a></li>"
         else:
-            prev_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)'>上一页</a></li>" % (page - 1, )
+            prev_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)'>上一页</a></li>" % (page - 1,)
         page_html.append(prev_html)
 
         # 11个页码
@@ -76,24 +76,24 @@ class PageInfo(object):
             # 当前页
             if page == i + 1:
                 a_html = "<li class='active'><a href='javascript:void(0)' onclick='ChangePage(%d)'>%d</a></li>" % (
-                    i + 1, i + 1, )
+                    i + 1, i + 1,)
             else:
-                a_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)'>%d</a></li>" % (i + 1, i + 1, )
+                a_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)'>%d</a></li>" % (i + 1, i + 1,)
             page_html.append(a_html)
         # 下一页
         if page + 1 > all_page_count:
             next_html = "<li class='disabled'><a href='javascript:void(0)'>下一页</a></li>"
         else:
-            next_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)' >下一页</a></li>" % (page + 1, )
+            next_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)' >下一页</a></li>" % (page + 1,)
 
         page_html.append(next_html)
 
         # 尾页
-        end_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)' >尾页</a></li>" % (all_page_count, )
+        end_html = "<li><a href='javascript:void(0)' onclick='ChangePage(%d)' >尾页</a></li>" % (all_page_count,)
         page_html.append(end_html)
 
         # 页码概要
-        end_html = "<li><a href='javascript:void(0)' >共 %d页 / %d 条数据</a></li>" % (all_page_count, total_items, )
+        end_html = "<li><a href='javascript:void(0)' >共 %d页 / %d 条数据</a></li>" % (all_page_count, total_items,)
         page_html.append(end_html)
 
         # 将列表中的元素拼接成页码字符串

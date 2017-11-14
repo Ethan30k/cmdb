@@ -4,17 +4,16 @@
 {% endblock %}
 
 {% block title %}
+    <ol class="breadcrumb" style="margin-bottom: 0;padding-left: 0px">
+        <li><a href="/index.html">首页</a></li>
+        <li><a href="#">资产管理</a></li>
+        <li class="active"><a href="/cmdb.html">资产查询</a></li>
+    </ol>
     <h1 class="page-header text-overflow">资产查询</h1>
 {% endblock %}
 
 {% block conent %}
-    <ol class="breadcrumb" style="margin-bottom: 0;">
-        <li><a href="/index.html">首页</a></li>
-        <li>资产管理</li>
-        <li class="active">资产查询</li>
-    </ol>
-    <div style="padding: 5px 8px;">
-
+    <div class="panel" style="padding: 5px 8px;">
         <div class="list-block">
             <div class="clearfix search-area">
 
@@ -87,16 +86,33 @@
                     <!-- 表格内容结束 -->
 
                 </table>
-                <div class="clearfix">
-                    <div class="right">
-                        <ul id="pager" class="pagination pagination-sm no-margin">
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="dataTables_length">
+                        <label>每页显示</label>
+                        <label>
+                            <select name="demo-dt-basic_length" aria-controls="demo-dt-basic" class="form-control input-sm" id="pageSizeSelector">
+                                <option id="pageSize" value="5">5</option>
+                                <option id="pageSize" value="10">10</option>
+                                <option id="pageSize" value="25">25</option>
+                                <option id="pageSize" value="50">50</option>
+                            </select>
+                        </label>
+                        <label>行</label>
+                    </div>
+                </div>
+                <div class="col-sm-6 ">
+                    <div class="dataTables_paginate paging_simple_numbers pull-right" id="demo-dt-basic_paginate">
+                        <ul id="pager" class="pagination">
 
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- 删除层开始 -->
@@ -134,6 +150,14 @@
             $.nbDataList('/assets.html');
         });
 
+        function ChangePage(pager) {
+{#            var peritems = $("#pageSizeSelector").prop("value");#}
+            $.ChangePage(pager)
+        }
 
+{#        $("#pageSizeSelector").change(function (){#}
+{#                alert("value:"+$(this).prop("value"));#}
+{#                //submit();#}
+{#            });#}
     </script>
 {% endblock %}

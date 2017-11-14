@@ -205,11 +205,12 @@
         $.Show('#shade,#loading');
         var conditions = JSON.stringify(aggregationSearchCondition());
         var $body = $('#table_body');
+        var peritems = $("#pageSizeSelector").prop("value");
         $.ajax({
             url: requestUrl,
             type: 'GET',
             traditional: true,
-            data: {'condition': conditions, 'pager': pager},
+            data: {'condition': conditions, 'pager': pager, 'peritems': peritems},
             dataType: 'JSON',
             success: function (response) {
                 $.Hide('#shade,#loading');
@@ -228,8 +229,8 @@
                 $.Hide('#shade,#loading');
             }
         })
-
     }
+
 
     /*
      初始化全局变量
@@ -529,6 +530,29 @@
             }
         });
 
+    }
+
+    function pageSizeSelector() {
+        $("#pageSizeSelector").change(function (){
+            var conditions = JSON.stringify(aggregationSearchCondition());
+            var peritems = $(this).prop("value");
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                traditional: true,
+                data: {'condition': conditions, 'pager': pager, 'peritems': peritems},
+                dataType: 'JSON',
+                success: function (response) {
+                    $.Hide('#shade,#loading');
+                    if (response.status) {
+                        initTableBody(response.data.page_info.page_start, response.data.data_list, response.data.table_config);
+                        initPager(response.data.page_info.page_str);
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            })
+        });
     }
 
 
@@ -896,6 +920,28 @@
             bindMenuFunction();
             bindMultiSelect();
             bindSearchCondition();
+            pageSizeSelector();
+        },
+
+        'ChangePage': function(pager){
+            var conditions = JSON.stringify(aggregationSearchCondition());
+            var peritems = $("#pageSizeSelector").prop("value");
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                traditional: true,
+                data: {'condition': conditions, 'pager': pager, 'peritems': peritems},
+                dataType: 'JSON',
+                success: function (response) {
+                    $.Hide('#shade,#loading');
+                    if (response.status) {
+                        initTableBody(response.data.page_info.page_start, response.data.data_list, response.data.table_config);
+                        initPager(response.data.page_info.page_str);
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            })
         }
 
     });

@@ -1,0 +1,66 @@
+{% extends 'layout/_layout.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block title %}
+    <ol class="breadcrumb" style="margin-bottom: 0;padding-left: 0px">
+        <li><a href="/index.html">首页</a></li>
+        <li><a href="#">资产管理</a></li>
+        <li><a href="/cmdb.html">资产查询</a></li>
+        <li class="active">资产详情</li>
+    </ol>
+    <h1 class="page-header text-overflow">资产详情</h1>
+{% endblock %}
+
+{% block conent %}
+
+    <div class="tab-base">
+
+        <!--Nav Tabs-->
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#demo-lft-tab-1" aria-expanded="true">基本信息</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#demo-lft-tab-2" aria-expanded="false">硬件信息</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#demo-lft-tab-3" aria-expanded="false">变更记录</a>
+            </li>
+        </ul>
+
+        <!--Tabs Content-->
+        <div class="tab-content">
+            <div id="demo-lft-tab-1" class="tab-pane fade active in">
+                {% include 'include/asset_basic.html' %}
+            </div>
+            <div id="demo-lft-tab-2" class="tab-pane fade">
+                {% if device_type_id == '1' %}
+                        {% include 'include/asset_server_hardware.html' %}
+                    {% else %}
+                        {% include 'include/asset_network_hardware.html' %}
+                {% endif %}
+            </div>
+            <div id="demo-lft-tab-3" class="tab-pane fade">
+                {% include 'include/asset_log.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/static/js/nb-list.js"></script>
+
+
+    <script>
+        $(function () {
+            $.initMenu('#menu_asset');
+
+        });
+
+
+    </script>
+{% endblock %}

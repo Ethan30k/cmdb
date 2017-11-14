@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^cmdb.html$', home.CmdbView.as_view()),
     url(r'^asset.html$', asset.AssetListView.as_view()),
     url(r'^assets.html$', asset.AssetJsonView.as_view()),
+    url(r'^asset-(?P<device_type_id>\d+)-(?P<asset_nid>\d+).html$', asset.AssetDetailView.as_view()),
+
 ]

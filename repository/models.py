@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     email = models.EmailField(verbose_name="邮箱")
     password = models.CharField(max_length=64, verbose_name="密码")
     phone = models.CharField(max_length=32, verbose_name="电话")
-    role = models.ManyToManyField("Role")
+    role = models.ManyToManyField("Role", related_name="role")
     status_choice = (
         (0, "正常"),
         (1, "禁用")
