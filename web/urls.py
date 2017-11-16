@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^asset.html$', asset.AssetListView.as_view()),
     url(r'^assets.html$', asset.AssetJsonView.as_view()),
     url(r'^asset-(?P<device_type_id>\d+)-(?P<asset_nid>\d+).html$', asset.AssetDetailView.as_view()),
+    url(r'^add-asset.html$', asset.AddAssetView.as_view()),
+    url(r'^edit-asset-(?P<device_type_id>\d+)-(?P<asset_nid>\d+).html$', asset.EditAssetView.as_view()),
 
 ]

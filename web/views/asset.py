@@ -34,3 +34,11 @@ class AssetDetailView(View):
     def get(self, request, device_type_id, asset_nid):
         response = asset.Asset.assets_detail(device_type_id, asset_nid)
         return render(request, 'asset_detail.html', {'response': response, 'device_type_id': device_type_id})
+
+
+class EditAssetView(View):
+    pass
+
+
+class AddAssetView(View):
+    pass
