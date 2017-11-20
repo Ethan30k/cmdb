@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from repository import models
+from web import forms
 
 from web.service import asset
 
@@ -37,8 +39,30 @@ class AssetDetailView(View):
 
 
 class EditAssetView(View):
-    pass
+    def get(self, request, device_type_id, asset_nid):
+        condition = {"device_type_id": device_type_id, "id": asset_nid}
+        asset = models.Asset.objects.filter(**condition)
+
+        model_form = forms.CreateModelForm(request, obj=models.Asset)
+        if request.method == "GET":
+            obj_form = model_form(instance=asset)
+        elif request.method == "POST":
+            obj_form = model_form(instance=asset, data=request.POST)
+            if obj_form.is_valid():
+                obj_form.save()
+            # print(obj_form)
+        return render(request, "asset_change.html", locals())
 
 
 class AddAssetView(View):
-    pass
+    def get(self, request, device_type_id, asset_nid):
+
+        model_form = forms.CreateModelForm(request, obj=models.Asset)
+        if request.method == "GET":
+            obj_form = model_form(instance=asset)
+        elif request.method == "POST":
+            obj_form = model_form(instance=asset, data=request.POST)
+            if obj_form.is_valid():
+                obj_form.save()
+            # print(obj_form)
+        return render(request, "asset_change.html", locals())

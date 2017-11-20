@@ -1,0 +1,31 @@
+{% extends 'layout/_layout.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block title %}
+    <ol class="breadcrumb" style="margin-bottom: 0;padding-left: 0px">
+        <li><a href="/index.html">首页</a></li>
+        <li><a href="#">资产管理</a></li>
+        <li><a href="/cmdb.html">资产查询</a></li>
+        <li class="active">资产修改</li>
+    </ol>
+    <h1 class="page-header text-overflow">资产修改</h1>
+{% endblock %}
+
+{% block conent %}
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/static/js/nb-list.js"></script>
+
+
+    <script>
+        $(function () {
+            $.initMenu('#menu_asset');
+
+        });
+    </script>
+{% endblock %}
