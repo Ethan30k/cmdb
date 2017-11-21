@@ -2,34 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+from django.forms import widgets
+from repository import models
 
 
-def CreateModelForm(request, obj):
+class AssetModelForm(forms.ModelForm):
     class Meta:
-        model = obj
-        fields = "__all__"
+        model = models.Asset
+        exclude = ['latest_date', 'create_date']
 
-    def __new__(cls, *args, **kwargs):
-        print('cls--->', cls.base_fields.items())
-        for field_name, field_obj in cls.base_fields.items():
-            field_obj.widget.attrs['class'] = 'form-control'
-            if field_name in obj.readonly_fields:
-                field_obj.widget.attrs['disabled'] = True
-        return forms.ModelForm.__new__(cls)
-
-    def default_clean(self):
-        # print("default clean:", self)
-        for field in obj.readonly_fields:
-            print("readonly:", field, self.instance)
-            field_val_from_db = getattr(self.instance, field)
-            field_val = self.cleaned_data.get(field)
-            if field_val_from_db == field_val:
-                print("field not change")
-            else:
-                self.add_error(field, '"%s" readonly field, value should be %s' % (field, field_val_from_db))
-        print("cleaned data:", self.cleaned_data)
-
-    dynamic_model_form = type("DynamicModelForm", (forms.ModelForm,), {"Meta": Meta})
-    setattr(dynamic_model_form, "__new__", __new__)
-    setattr(dynamic_model_form, "clean", default_clean)
-    return dynamic_model_form
+    # widgets = {
+    #         'device_type_id': widgets.Textarea(attrs={'class': 'form-control', 'id': 'demo-is-inputnormal', 'placeholder': ''})
+    #     }

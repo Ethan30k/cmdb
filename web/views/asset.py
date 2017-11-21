@@ -41,28 +41,27 @@ class AssetDetailView(View):
 class EditAssetView(View):
     def get(self, request, device_type_id, asset_nid):
         condition = {"device_type_id": device_type_id, "id": asset_nid}
-        asset = models.Asset.objects.filter(**condition)
+        asset = models.Asset.objects.filter(**condition).first()
+        obj_form = forms.AssetModelForm(instance=asset)
+        return render(request, "asset_change.html", locals())
 
-        model_form = forms.CreateModelForm(request, obj=models.Asset)
-        if request.method == "GET":
-            obj_form = model_form(instance=asset)
-        elif request.method == "POST":
-            obj_form = model_form(instance=asset, data=request.POST)
-            if obj_form.is_valid():
-                obj_form.save()
-            # print(obj_form)
+    def post(self, request, device_type_id, asset_nid):
+        condition = {"device_type_id": device_type_id, "id": asset_nid}
+        asset = models.Asset.objects.filter(**condition).first()
+        obj_form = forms.AssetModelForm(request.POST, instance=asset)
+        if obj_form.is_valid():
+            obj_form.save()
+            print(obj_form.errors.as_json())
         return render(request, "asset_change.html", locals())
 
 
 class AddAssetView(View):
-    def get(self, request, device_type_id, asset_nid):
+    def get(self, request):
+        obj_form = forms.AssetModelForm()
+        return render(request, "asset_add.html", locals())
 
-        model_form = forms.CreateModelForm(request, obj=models.Asset)
-        if request.method == "GET":
-            obj_form = model_form(instance=asset)
-        elif request.method == "POST":
-            obj_form = model_form(instance=asset, data=request.POST)
-            if obj_form.is_valid():
-                obj_form.save()
-            # print(obj_form)
-        return render(request, "asset_change.html", locals())
+    def post(self, request):
+        obj_form = forms.AssetModelForm(request.POST)
+        if obj_form.is_valid():
+            obj_form.save()
+        return render(request, "asset_add.html", locals())

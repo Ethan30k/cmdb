@@ -14,7 +14,44 @@
 {% endblock %}
 
 {% block conent %}
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">请完善资产信息</h3>
+        </div>
 
+        <!--Input Size-->
+        <!--===================================================-->
+        <form class="form-horizontal" method="POST" action="/edit-asset-{{ device_type_id }}-{{ asset_nid }}.html">{% csrf_token %}
+            <div class="panel-body">
+                {% for field in obj_form %}
+                <div class="form-group">
+
+                    <label for="demo-is-inputnormal" class="col-sm-3 control-label">
+                        {% if field.field.required %}
+                            <b>{{ field.label }}</b>
+                        {% else %}
+                            {{ field.label }}
+                        {% endif %}
+                    </label>
+                    <div class="col-sm-6">
+                        {{ field }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <button class="btn btn-info btn-labeled fa fa-user fa-lg" type="submit">保存</button>
+                        <button class="btn btn-warning btn-labeled fa fa-repeat fa-lg" type="reset">重置</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--===================================================-->
+        <!--End Input Size-->
+
+    </div>
 {% endblock %}
 
 {% block js %}
