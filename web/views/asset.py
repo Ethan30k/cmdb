@@ -65,3 +65,5 @@ class AddAssetView(View):
         if obj_form.is_valid():
             obj_form.save()
         return render(request, "asset_add.html", locals())
+
+
