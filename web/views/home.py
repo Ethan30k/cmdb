@@ -6,6 +6,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
+from repository import models
 
 
 def auth(func):
@@ -34,14 +35,18 @@ class Login(View):
         return render(request, 'login.html')
 
     def post(self, request):
-        user = request.POST.get('user')
+        email = request.POST.get('email')
         pwd = request.POST.get('pwd')
-        if user == 'chengyiqiang' and pwd == '123':
-            request.session['username'] = user
+        obj = models.UserProfile.objects.filter(email=email, password=pwd).first()
+        if obj:
+            request.session['email'] = email
+            request.session['username'] = obj.name
             request.session['is_login'] = True
             print(request.POST.get('rmb'))
             if request.POST.get('rmb') == '1':
-                request.session.set_expiry(10)
+                request.session.set_expiry(604800)
+            else:
+                request.session.set_expiry(0)
             return redirect('/cmdb.html')
         else:
             return redirect('/login.html')

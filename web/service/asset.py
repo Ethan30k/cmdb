@@ -45,10 +45,10 @@ class Asset(BaseServiceList):
                 'attr': {}
             },
             {
-                'q': 'network_title',
-                'title': "网络设备标识",
+                'q': 'management_ip',
+                'title': "管理ip",
                 'display': 1,
-                'text': {'content': "{n}", 'kwargs': {'n': '@network_title'}},
+                'text': {'content': "{n}", 'kwargs': {'n': '@management_ip'}},
                 'attr': {}
             },
             {
@@ -122,7 +122,7 @@ class Asset(BaseServiceList):
         # 额外搜索条件
         extra_select = {
             'server_title': 'select hostname from repository_server where repository_server.asset_id=repository_asset.id and repository_asset.device_type_id=1',
-            'network_title': 'select management_ip from repository_networkdevice where repository_networkdevice.asset_id=repository_asset.id and repository_asset.device_type_id=2',
+            'management_ip': 'select management_ip from repository_networkdevice where repository_networkdevice.asset_id=repository_asset.id and repository_asset.device_type_id=2',
         }
         super(Asset, self).__init__(condition_config, table_config, extra_select)
 
