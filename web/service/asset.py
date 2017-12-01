@@ -56,7 +56,7 @@ class Asset(BaseServiceList):
                 'title': "IDC",
                 'display': 1,
                 'text': {'content': "{n}", 'kwargs': {'n': '@@idc_list'}},
-                'attr': {'name': 'idc_id', 'id': '@idc_id', 'origin': '@idc_id', 'edit-enable': 'true',
+                'attr': {'name': 'idc_id', 'id': '@idc_id', 'original': '@idc_id', 'edit-enable': 'true',
                          'edit-type': 'select',
                          'global-name': 'idc_list'}
             },
@@ -65,14 +65,14 @@ class Asset(BaseServiceList):
                 'title': "楼层",
                 'display': 1,
                 'text': {'content': "{floor}", 'kwargs': {'floor': '@floor'}},
-                'attr': {'name': 'floor', 'origin': '@floor', 'edit-enable': 'true', 'edit-type': 'input'}
+                'attr': {'name': 'floor', 'original': '@floor', 'edit-enable': 'true', 'edit-type': 'input'}
             },
             {
                 'q': 'cabinet_num',
                 'title': "机柜号",
                 'display': 1,
                 'text': {'content': "{cabinet_num}", 'kwargs': {'cabinet_num': '@cabinet_num'}},
-                'attr': {'name': 'cabinet_num', 'edit-enable': 'true', 'edit-type': 'input', 'origin': '@cabinet_num', }
+                'attr': {'name': 'cabinet_num', 'edit-enable': 'true', 'edit-type': 'input', 'original': '@cabinet_num', }
             },
             {
                 'q': 'cabinet_order',
@@ -80,21 +80,14 @@ class Asset(BaseServiceList):
                 'display': 1,
                 'text': {'content': "{cabinet_order}", 'kwargs': {'cabinet_order': '@cabinet_order'}},
                 'attr': {'name': 'cabinet_order', 'edit-enable': 'true', 'edit-type': 'input',
-                         'origin': '@cabinet_order', }
+                         'original': '@cabinet_order', }
             },
             {
                 'q': 'business_unit_id',
-                'title': "业务线ID",
-                'display': 0,
-                'text': {'content': "", 'kwargs': {}},
-                'attr': {}
-            },
-            {
-                'q': 'business_unit__name',
                 'title': "业务线",
                 'display': 1,
-                'text': {'content': "{business_unit__name}", 'kwargs': {'business_unit__name': '@business_unit__name'}},
-                'attr': {'name': 'business_unit_id', 'id': '@business_unit_id', 'origin': '@business_unit_id',
+                'text': {'content': "{business_unit__name}", 'kwargs': {'business_unit__name': '@@business_unit_list'}},
+                'attr': {'name': 'business_unit_id', 'id': '@business_unit_id', 'original': '@business_unit_id',
                          'edit-enable': 'true',
                          'edit-type': 'select',
                          'global-name': 'business_unit_list'}
@@ -104,7 +97,7 @@ class Asset(BaseServiceList):
                 'title': "资产状态",
                 'display': 1,
                 'text': {'content': "{n}", 'kwargs': {'n': '@@device_status_list'}},
-                'attr': {'name': 'device_status_id', 'id': '@device_status_id', 'origin': '@device_status_id',
+                'attr': {'name': 'device_status_id', 'id': '@device_status_id', 'original': '@device_status_id',
                          'edit-enable': 'true',
                          'edit-type': 'select',
                          'global-name': 'device_status_list'}
@@ -144,8 +137,9 @@ class Asset(BaseServiceList):
 
     @property
     def business_unit_list(self):
-        values = models.BusinessUnit.objects.values('id', 'name')
-        return list(values)
+        values = models.BusinessUnit.objects.only('id', 'name')
+        result = map(lambda x: {'id': x.id, 'name': "%s" % x.name}, values)
+        return list(result)
 
     @staticmethod
     def assets_condition(request):
@@ -194,7 +188,7 @@ class Asset(BaseServiceList):
         except Exception as e:
             response.status = False
             response.message = str(e)
-        # print(ret['global_dict']['device_status_list'])
+        print(response)
         return response
 
     @staticmethod
@@ -217,9 +211,7 @@ class Asset(BaseServiceList):
         try:
             response.error = []
             put_dict = QueryDict(request.body, encoding='utf-8')
-            print(type(put_dict.get('update_list')))
             update_list = json.loads(put_dict.get('update_list'))
-            print(update_list)
             error_count = 0
             for row_dict in update_list:
                 nid = row_dict.pop('nid')

@@ -97,7 +97,7 @@
 
     function refreshData() {
         var currentPage = $('#pager').find("li[class='active']").text();
-        initialize(currentPage);
+        initialize_refresh(currentPage);
     }
 
     function deleteData() {
@@ -215,6 +215,7 @@
             success: function (response) {
                 $.Hide('#shade,#loading');
                 if (response.status) {
+                    console.log(response.data.data_list)
                     initGlobal(response.data.global_dict);
                     initTableHeader(response.data.table_config);
                     initTableBody(response.data.page_info.page_start, response.data.data_list, response.data.table_config);
@@ -231,6 +232,37 @@
         })
     }
 
+    /*
+    刷新，保存，索引等功能重载数据用，去掉了checkbox绑定
+    */
+    function initialize_refresh(pager) {
+        $.Show('#shade,#loading');
+        var conditions = JSON.stringify(aggregationSearchCondition());
+        var $body = $('#table_body');
+        var peritems = $("#pageSizeSelector").prop("value");
+        $.ajax({
+            url: requestUrl,
+            type: 'GET',
+            traditional: true,
+            data: {'condition': conditions, 'pager': pager, 'peritems': peritems},
+            dataType: 'JSON',
+            success: function (response) {
+                $.Hide('#shade,#loading');
+                if (response.status) {
+                    initGlobal(response.data.global_dict);
+                    initTableHeader(response.data.table_config);
+                    initTableBody(response.data.page_info.page_start, response.data.data_list, response.data.table_config);
+                    initPager(response.data.page_info.page_str);
+                    initSearchCondition(response.data.condition_config);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function () {
+                $.Hide('#shade,#loading');
+            }
+        })
+    }
 
     /*
      初始化全局变量
@@ -288,7 +320,7 @@
         $.each(list, function (k1, row) {
             // row 表示从数据库获取的每行资产字典信息 {'id':'1','name': 'root' ...}
             // tbConfig 包含了所有表格的配置
-
+            console.log(row)
             var tr = document.createElement('tr');
             tr.setAttribute('nid', row['id']);
             tr.setAttribute('num', startNum + k1 + 1);
@@ -322,7 +354,7 @@
                         } else {
                             kwargs[k] = v;
                         }
-                    });
+                    })
                     td.innerHTML = config.text.content.format(kwargs);
 
                     // 创建td的属性
@@ -463,7 +495,7 @@
      */
     function bindSubmitSearchCondition() {
         $('#search_condition_submit').click(function () {
-            initialize(1);
+            initialize_refresh(1);
         });
     }
 
@@ -575,6 +607,7 @@
 
         if (editType == 'input') {
             var text = $td.text();
+
             $td.addClass('padding-3');
             var htmlTag = $.CreateInput({'value': text, 'class': 'padding-tb-5 form-control '}, {'width': '100%'});
             $td.empty().append(htmlTag);
@@ -895,6 +928,7 @@
                     var check = $(this).prop('checked');
                     var $tr = $(this).parent().parent();
                     if (check) {
+
                         $tr.addClass('success');
                         DoTrIntoEdit($tr, specialInEditFunc);
                     }

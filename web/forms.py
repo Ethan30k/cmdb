@@ -11,6 +11,13 @@ class AssetModelForm(forms.ModelForm):
         model = models.Asset
         exclude = ['latest_date', 'create_date']
 
-    # widgets = {
-    #         'device_type_id': widgets.Textarea(attrs={'class': 'form-control', 'id': 'demo-is-inputnormal', 'placeholder': ''})
-    #     }
+        # widgets = {
+        #         'device_type_id': widgets.Textarea(attrs={'class': 'form-control', 'id': 'demo-is-inputnormal',
+        #         'placeholder': ''})
+        #     }
+
+
+class UserModelForm(forms.ModelForm):
+    class Meta:
+        model = models.UserProfile
+        exclude = ['password']
