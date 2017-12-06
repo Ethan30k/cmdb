@@ -66,7 +66,7 @@ class BusinessUnit(models.Model):
     业务线
     """
     name = models.CharField('业务线', max_length=64, unique=True)
-    contact = models.ForeignKey('Role', verbose_name='业务联系人', related_name='c')
+    contact = models.ForeignKey('Role', verbose_name='业务联系人', related_name='c', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "业务线表"
@@ -98,8 +98,8 @@ class Asset(models.Model):
     cabinet_order = models.CharField('机位号', max_length=30, null=True, blank=True)
     floor = models.IntegerField('楼层', default=1, null=True, blank=True)
 
-    idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True)
-    business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True)
+    idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True, on_delete=models.CASCADE)
+    business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True, on_delete=models.CASCADE)
 
     latest_date = models.DateField(null=True)
     create_date = models.DateTimeField(auto_now_add=True)
@@ -132,7 +132,7 @@ class Server(models.Model):
     """
     服务器信息
     """
-    asset = models.OneToOneField('Asset')
+    asset = models.OneToOneField('Asset', on_delete=models.CASCADE)
 
     hostname = models.CharField(max_length=128, unique=True)
     sn = models.CharField('SN号', max_length=64, db_index=True)
@@ -166,7 +166,7 @@ class Disk(models.Model):
     model = models.CharField('磁盘型号', max_length=32)
     capacity = models.FloatField('磁盘容量GB')
     pd_type = models.CharField('磁盘类型', max_length=32)
-    server_obj = models.ForeignKey('Server', related_name='disk')
+    server_obj = models.ForeignKey('Server', related_name='disk', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "硬盘表"
@@ -184,7 +184,7 @@ class NIC(models.Model):
     netmask = models.CharField(max_length=64)
     ipaddrs = models.CharField('ip地址', max_length=256)
     up = models.BooleanField(default=False)
-    server_obj = models.ForeignKey('Server', related_name='nic')
+    server_obj = models.ForeignKey('Server', related_name='nic', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "网卡表"
@@ -204,7 +204,7 @@ class Memory(models.Model):
     sn = models.CharField('内存SN号', max_length=64, null=True, blank=True)
     speed = models.CharField('速度', max_length=16, null=True, blank=True)
 
-    server_obj = models.ForeignKey('Server', related_name='memory')
+    server_obj = models.ForeignKey('Server', related_name='memory', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "内存表"
@@ -214,7 +214,7 @@ class Memory(models.Model):
 
 
 class NetworkDevice(models.Model):
-    asset = models.OneToOneField('Asset')
+    asset = models.OneToOneField('Asset', on_delete=models.CASCADE)
     management_ip = models.CharField('管理IP', max_length=64, blank=True, null=True)
     vlan_ip = models.CharField('VlanIP', max_length=64, blank=True, null=True)
     intranet_ip = models.CharField('内网IP', max_length=128, blank=True, null=True)
@@ -235,9 +235,9 @@ class AssetRecord(models.Model):
     """
     资产变更记录,creator为空时，表示是资产汇报的数据。
     """
-    asset_obj = models.ForeignKey('Asset', related_name='ar')
+    asset_obj = models.ForeignKey('Asset', related_name='ar', on_delete=models.CASCADE)
     content = models.TextField(null=True)
-    creator = models.ForeignKey('UserProfile', null=True, blank=True)
+    creator = models.ForeignKey('UserProfile', null=True, blank=True, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -251,7 +251,7 @@ class ErrorLog(models.Model):
     """
     错误日志,如：agent采集数据错误 或 运行错误
     """
-    asset_obj = models.ForeignKey('Asset', null=True, blank=True)
+    asset_obj = models.ForeignKey('Asset', null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=16)
     content = models.TextField()
     create_at = models.DateTimeField(auto_now_add=True)

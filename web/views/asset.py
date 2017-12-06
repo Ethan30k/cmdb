@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from django.views import View
 from django.shortcuts import render
@@ -20,6 +20,7 @@ class AssetJsonView(View):
     def get(self, request):
         obj = asset.Asset()
         response = obj.fetch_assets(request)
+        print(response.__dict__)
         return JsonResponse(response.__dict__)
 
     def delete(self, request):
