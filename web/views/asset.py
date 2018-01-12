@@ -41,6 +41,7 @@ class AssetDetailView(View):
 
 class EditAssetView(View):
     def get(self, request, device_type_id, asset_nid):
+        username = request.session.get('username')
         condition = {"device_type_id": device_type_id, "id": asset_nid}
         asset = models.Asset.objects.filter(**condition).first()
         obj_form = forms.AssetModelForm(instance=asset)
@@ -58,6 +59,7 @@ class EditAssetView(View):
 
 class AddAssetView(View):
     def get(self, request):
+        username = request.session.get('username')
         obj_form = forms.AssetModelForm()
         return render(request, "asset_add.html", locals())
 

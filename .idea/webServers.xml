@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="73f21920-ef0e-4443-a871-40379f8852d2" name="cmdb" url="http://192.168.189.133">
-        <fileTransfer host="192.168.189.133" port="22" rootFolder="/root/cmdb" accessType="SFTP" password="df9bdf98df99df9edf9fdf9c" username="root">
+      <webServer id="73f21920-ef0e-4443-a871-40379f8852d2" name="cmdb" url="http://192.168.189.132">
+        <fileTransfer host="192.168.189.132" port="22" rootFolder="/root/nb_cmdb" accessType="SFTP" password="df9bdf98df99df9edf9fdf9c" username="root">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

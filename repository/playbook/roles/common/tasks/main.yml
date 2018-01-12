@@ -1,0 +1,6 @@
+---
+- name: run this command and ignore the result
+  shell: /usr/bin/whoami
+
+- name: server_info
+  shell: echo ansible_os_family

@@ -101,7 +101,7 @@ class Asset(models.Model):
     idc = models.ForeignKey('IDC', verbose_name='IDC机房', null=True, blank=True, on_delete=models.CASCADE)
     business_unit = models.ForeignKey('BusinessUnit', verbose_name='属于的业务线', null=True, blank=True, on_delete=models.CASCADE)
 
-    latest_date = models.DateField(null=True)
+    latest_date = models.DateField(auto_now=True, null=True)
     create_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -115,11 +115,11 @@ class IDC(models.Model):
     """
     机房信息
     """
-    name = models.CharField('机房', max_length=32)
-    addr = models.CharField('地址', max_length=64)
-    watch_tel = models.CharField('值班电话', max_length=11)
-    manager = models.CharField('值班经理', max_length=32)
-    manager_tel = models.CharField('经理电话', max_length=11)
+    name = models.CharField('机房', max_length=32, null=True, blank=True)
+    addr = models.CharField('地址', max_length=64, null=True, blank=True)
+    watch_tel = models.CharField('值班电话', max_length=11, null=True, blank=True)
+    manager = models.CharField('值班经理', max_length=32, null=True, blank=True)
+    manager_tel = models.CharField('经理电话', max_length=11, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "机房表"
@@ -138,7 +138,7 @@ class Server(models.Model):
     sn = models.CharField('SN号', max_length=64, db_index=True)
     manufacturer = models.CharField(verbose_name='制造商', max_length=64, null=True, blank=True)
     model = models.CharField('型号', max_length=64, null=True, blank=True)
-
+    port = models.DecimalField(max_digits=6, decimal_places=0, blank=True, null=True)
     ilo_ip = models.GenericIPAddressField('管理IP', null=True, blank=True)
 
     os_platform = models.CharField('系统', max_length=16, null=True, blank=True)
@@ -149,7 +149,7 @@ class Server(models.Model):
     cpu_model = models.CharField('CPU型号', max_length=128, null=True, blank=True)
 
     create_date = models.DateTimeField(auto_now_add=True, blank=True)
-    latest_date = models.DateField(null=True)
+    latest_date = models.DateField(auto_now=True, null=True)
 
     class Meta:
         verbose_name_plural = "服务器表"
@@ -162,10 +162,10 @@ class Disk(models.Model):
     """
     硬盘信息
     """
-    slot = models.CharField('插槽位', max_length=8)
-    model = models.CharField('磁盘型号', max_length=32)
-    capacity = models.FloatField('磁盘容量GB')
-    pd_type = models.CharField('磁盘类型', max_length=32)
+    slot = models.CharField('插槽位', max_length=8, null=True, blank=True)
+    model = models.CharField('磁盘型号', max_length=32, null=True, blank=True)
+    capacity = models.FloatField('磁盘容量GB', null=True, blank=True)
+    pd_type = models.CharField('磁盘类型', max_length=32, null=True, blank=True)
     server_obj = models.ForeignKey('Server', related_name='disk', on_delete=models.CASCADE)
 
     class Meta:
@@ -179,10 +179,10 @@ class NIC(models.Model):
     """
     网卡信息
     """
-    name = models.CharField('网卡名称', max_length=128)
-    hwaddr = models.CharField('网卡mac地址', max_length=64)
-    netmask = models.CharField(max_length=64)
-    ipaddrs = models.CharField('ip地址', max_length=256)
+    name = models.CharField('网卡名称', max_length=128, null=True, blank=True)
+    hwaddr = models.CharField('网卡mac地址', max_length=64, null=True, blank=True)
+    netmask = models.CharField(max_length=64, null=True, blank=True)
+    ipaddrs = models.CharField('ip地址', max_length=256, null=True, blank=True)
     up = models.BooleanField(default=False)
     server_obj = models.ForeignKey('Server', related_name='nic', on_delete=models.CASCADE)
 
@@ -197,9 +197,9 @@ class Memory(models.Model):
     """
     内存信息
     """
-    slot = models.CharField('插槽位', max_length=32)
+    slot = models.CharField('插槽位', max_length=32, null=True, blank=True)
     manufacturer = models.CharField('制造商', max_length=32, null=True, blank=True)
-    model = models.CharField('型号', max_length=64)
+    model = models.CharField('型号', max_length=64, null=True, blank=True)
     capacity = models.FloatField('容量', null=True, blank=True)
     sn = models.CharField('内存SN号', max_length=64, null=True, blank=True)
     speed = models.CharField('速度', max_length=16, null=True, blank=True)

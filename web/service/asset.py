@@ -52,6 +52,13 @@ class Asset(BaseServiceList):
                 'attr': {}
             },
             {
+                'q': 'ipaddrs',
+                'title': "网卡ip",
+                'display': 1,
+                'text': {'content': "{n}", 'kwargs': {'n': '@ipaddrs'}},
+                'attr': {}
+            },
+            {
                 'q': 'idc_id',
                 'title': "IDC",
                 'display': 1,
@@ -72,7 +79,7 @@ class Asset(BaseServiceList):
                 'title': "机柜号",
                 'display': 1,
                 'text': {'content': "{cabinet_num}", 'kwargs': {'cabinet_num': '@cabinet_num'}},
-                'attr': {'name': 'cabinet_num', 'edit-enable': 'true', 'edit-type': 'input', 'original': '@cabinet_num', }
+                'attr': {'name': 'cabinet_num', 'edit-enable': 'true', 'edit-type': 'input', 'original': '@cabinet_num'}
             },
             {
                 'q': 'cabinet_order',
@@ -116,6 +123,7 @@ class Asset(BaseServiceList):
         extra_select = {
             'server_title': 'select hostname from repository_server where repository_server.asset_id=repository_asset.id and repository_asset.device_type_id=1',
             'management_ip': 'select management_ip from repository_networkdevice where repository_networkdevice.asset_id=repository_asset.id and repository_asset.device_type_id=2',
+            'ipaddrs': 'select ipaddrs FROM repository_nic,repository_server WHERE repository_nic.server_obj_id=repository_server.id AND repository_asset.id=repository_server.asset_id',
         }
         super(Asset, self).__init__(condition_config, table_config, extra_select)
 

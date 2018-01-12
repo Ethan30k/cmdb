@@ -215,7 +215,7 @@
             success: function (response) {
                 $.Hide('#shade,#loading');
                 if (response.status) {
-                    console.log(response.data.data_list)
+                    console.log(response.data.data_list);
                     initGlobal(response.data.global_dict);
                     initTableHeader(response.data.table_config);
                     initTableBody(response.data.page_info.page_start, response.data.data_list, response.data.table_config);
