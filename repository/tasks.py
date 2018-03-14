@@ -33,21 +33,23 @@ def xsum(numbers):
 def server_info():
     resource = [
         # {"hostname": "192.168.189.133"},
-        # {"hostname": "192.168.84.115"},
-        # {"hostname": "192.168.84.146", "port": "2188"},
+        {"hostname": "192.168.84.115"},
+        {"hostname": "192.168.84.146", "port": "2188"},
     ]
-    host_list = []
-    iplist = models.NIC.objects.values_list("ipaddrs")
-    for ip in iplist:
-        host = ip[0]
-        port = models.Server.objects.filter(nic__ipaddrs=host).first().port
-        resource.append({"hostname": host, "port": port})
-        host_list.append(host)
+    # host_list = []
+    host_list = ["192.168.84.115", "192.168.84.146"]
+    # iplist = models.NIC.objects.values_list("ipaddrs")
+    # for ip in iplist:
+    #     host = ip[0]
+    #     port = models.Server.objects.filter(nic__ipaddrs=host).first().port
+    #     resource.append({"hostname": host, "port": port})
+    #     host_list.append(host)
 
     ANS = ANSRunner(resource)
     ANS.run_model(host_list=host_list, module_name='setup', module_args="")
+    print(ANS.get_model_result())
     data = ANS.handle_cmdb_data(ANS.get_model_result())
-    print(data)
+    # print(data)
     if data:
         for cmdb_data in data:
             status = cmdb_data.get('status')
