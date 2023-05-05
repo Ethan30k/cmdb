@@ -1,4 +1,4 @@
-django==2.0
+django==3.2.19
 Celery==4.1.0
 django-celery-beat
 celery-with-redis
