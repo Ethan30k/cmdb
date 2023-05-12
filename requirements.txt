@@ -2,5 +2,5 @@ django==2.0
 Celery==4.1.0
 django-celery-beat
 celery-with-redis
-ansible==2.5.0
+ansible==5.0.0a1
 redis
