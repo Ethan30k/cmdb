@@ -4,3 +4,4 @@ django-celery-beat
 celery-with-redis
 ansible==2.5.0
 redis
+setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
